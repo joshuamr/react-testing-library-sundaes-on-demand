@@ -39,5 +39,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest-cucumber": "^3.0.1",
+    "prettier": "2.7.1"
   }
 }
