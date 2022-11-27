@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
+
+const popover = (
+  <Popover id="popover-basic">
+    <Popover.Body>No ice cream will actually be delivered.</Popover.Body>
+  </Popover>
+);
 
 function SummaryForm() {
   const [isChecked, setIsChecked] = useState(false);
 
   const checkboxLabel = (
     <span>
-      I agree to the <span style={{ color: "blue" }}>Terms and Conditions</span>
+      I agree to the
+      <OverlayTrigger placement="right" overlay={popover}>
+        <span style={{ color: "blue" }}>Terms and Conditions</span>
+      </OverlayTrigger>
     </span>
   );
   return (
