@@ -9,7 +9,7 @@ const feature = loadFeature("features/SummaryForm.feature");
 
 defineFeature(feature, (test) => {
   test("Confirming the summary", ({ given, and, when, then }) => {
-    let confirmCheckBox, confirmButton;
+    let confirmCheckBox: HTMLElement, confirmButton: HTMLElement;
 
     const user = userEvent.setup();
 
@@ -53,10 +53,10 @@ defineFeature(feature, (test) => {
     });
   });
   test("Hovering the terms and condition", ({ given, and, when, then }) => {
-    let termsAndConditions;
+    let termsAndConditions: HTMLElement | null;
 
     const user = userEvent.setup();
-    let popover;
+    let popover: HTMLElement | null;
 
     given("there is text on the page that says terms and condition", () => {
       render(<SummaryForm />);
@@ -67,6 +67,7 @@ defineFeature(feature, (test) => {
       expect(popover).toBeNull();
     });
     when("the text is hovered", async () => {
+      if (!termsAndConditions) throw new Error();
       await user.hover(termsAndConditions);
     });
     then("the popover is shown", () => {
@@ -75,6 +76,7 @@ defineFeature(feature, (test) => {
     });
 
     when("the text is unhovered", async () => {
+      if (!termsAndConditions) throw new Error();
       await user.unhover(termsAndConditions);
     });
 
