@@ -2,8 +2,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import { useOrderDetails } from "../../contexts/OrderDetails";
-import { FormControl } from "react-bootstrap";
 import { OptionType } from "./types/option-type";
+import { useState } from "react";
+import { determineScoopInputIsValid } from "../../utilities";
 
 const ScoopOption = ({
   name,
@@ -14,8 +15,16 @@ const ScoopOption = ({
 }) => {
   const { updateItemCount } = useOrderDetails();
 
+  const [isValid, setIsValid] = useState(true);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateItemCount(name, +e.target.value, OptionType.SCOOP);
+
+    const inputValue = parseFloat(e.target.value);
+
+    const inputIsValid = determineScoopInputIsValid(inputValue);
+
+    setIsValid(inputIsValid);
   };
   return (
     <Col xs={12} sm={6} md={4} lg={3} style={{ textAlign: "center" }}>
@@ -37,6 +46,7 @@ const ScoopOption = ({
             type="number"
             defaultValue={0}
             onChange={handleChange}
+            isInvalid={!isValid}
           ></Form.Control>
         </Col>
       </Form.Group>

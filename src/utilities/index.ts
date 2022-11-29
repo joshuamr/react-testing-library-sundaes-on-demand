@@ -14,3 +14,12 @@ export function formatCurrency(currency: number): string {
     minimumFractionDigits: 2,
   }).format(currency);
 }
+
+export function determineScoopInputIsValid(inputValue: number) {
+  return (
+    inputValue < 10 &&
+    inputValue >= 0 &&
+    !isNaN(inputValue) &&
+    parseInt(String(inputValue)) === inputValue
+  );
+}

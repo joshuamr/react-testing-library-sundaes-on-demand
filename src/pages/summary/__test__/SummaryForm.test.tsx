@@ -1,6 +1,7 @@
 import { defineFeature, loadFeature } from "jest-cucumber";
 
-import { render, fireEvent, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "../../../test-utils/testing-library-utils";
 import SummaryForm from "../SummaryForm";
 
 import userEvent from "@testing-library/user-event";
@@ -14,7 +15,7 @@ defineFeature(feature, (test) => {
     const user = userEvent.setup();
 
     given("there is a checkbox to confirm the condition on the page", () => {
-      render(<SummaryForm />);
+      render(<SummaryForm setError={jest.fn()} />);
       confirmCheckBox = screen.getByRole("checkbox", {
         name: /i agree to the terms and conditions/i,
       });
@@ -59,7 +60,7 @@ defineFeature(feature, (test) => {
     let popover: HTMLElement | null;
 
     given("there is text on the page that says terms and condition", () => {
-      render(<SummaryForm />);
+      render(<SummaryForm setError={jest.fn()} />);
       termsAndConditions = screen.queryByText(/terms and conditions/i);
     });
     given("the popover is not in the dom", () => {

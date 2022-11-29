@@ -13,6 +13,7 @@
     ],
     "rules": {
         "prettier/prettier":  "error",
-        "no-console": ["error", { "allow": ["warn", "error"] }]
+        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "no-debugger": "error"
     }
 }
