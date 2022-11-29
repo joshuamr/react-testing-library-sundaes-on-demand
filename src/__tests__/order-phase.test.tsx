@@ -94,7 +94,7 @@ describe("Order Phases", () => {
 
     expect(orderButton).toBeDisabled();
   });
-  test.only("should show error on server error", async () => {
+  test("should show error on server error", async () => {
     server.use(
       rest.post("http://localhost:3030/order", (req, res, ctx) => {
         return res(ctx.status(500));
@@ -130,9 +130,9 @@ describe("Order Phases", () => {
     });
 
     await user.click(confirmButton);
-    // await waitFor(async () => {
-    // const errorAlertAfter = await screen.findByRole("alert");
-    // expect(errorAlertAfter).toBeInTheDocument();
-    // });
+    await waitFor(async () => {
+      const errorAlertAfter = await screen.findByRole("alert");
+      expect(errorAlertAfter).toBeInTheDocument();
+    });
   });
 });
